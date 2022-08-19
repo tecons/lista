@@ -1,2 +1,43 @@
-0.0.0.0 globo.com
-0.0.0.0 uol.com.br
+# Title: FITEL/GAMES
+#
+# This hosts file is a merged collection of hosts from reputable sources,
+# with a dash of crowd sourcing via GitHub
+#
+# Date: 19 August 2022 12:38:00 (UTC)
+# Number of unique domains: 5
+#
+# Fetch the latest version of this file: https://github.com/tecons/lista/blob/main/
+# Project home page: https://github.com/tecons/lista/blob/main/
+# Project releases: https://github.com/tecons/lista/blob/main
+#
+# ===============================================================
+
+127.0.0.1 localhost
+127.0.0.1 localhost.localdomain
+127.0.0.1 local
+255.255.255.255 broadcasthost
+::1 localhost
+::1 ip6-localhost
+::1 ip6-loopback
+fe80::1%lo0 localhost
+ff00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+ff02::3 ip6-allhosts
+0.0.0.0 0.0.0.0
+
+# Custom host records are listed here.
+
+
+# End of custom host records.
+# FITEL GAMES
+
+#=====================================
+# Title: FITEL/GAMES
+# http://stevenblack.com
+
+0.0.0.0 www.globo.com
+0.0.0.0 www.uol.com.br
+0.0.0.0 www.terra.com.br
+0.0.0.0 instagram.com.br
