@@ -1,0 +1,12 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+}
+
+canvas {
+  display: none; /* Esconde o canvas por padrão */
+}
+
+img {
+  pointer-events: none; /* Impede interação com a moldura */
+}
