@@ -10,10 +10,15 @@ const frameSelector = document.getElementById("frameSelector");
 const ctx = photoCanvas.getContext("2d");
 
 // Inicializa a câmera
-navigator.mediaDevices.getUserMedia({ video: true })
+navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
   .then((stream) => {
-    video.srcObject = stream; // Conecta o stream de vídeo ao elemento <video>
-    video.play(); // Garante que o vídeo está ativo
+    const video = document.getElementById("video");
+    video.srcObject = stream;
+
+    // Garante que o vídeo seja reproduzido corretamente em iOS
+    video.onloadedmetadata = () => {
+      video.play();
+    };
   })
   .catch((err) => {
     alert("Erro ao acessar a câmera: " + err.message);
