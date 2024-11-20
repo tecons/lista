@@ -8,43 +8,51 @@ const frameSelector = document.getElementById("frameSelector");
 
 // Contexto do canvas
 const ctx = photoCanvas.getContext("2d");
+let currentFacingMode = "environment"; // Câmera inicial (traseira)
+let currentStream = null; // Stream de vídeo atual
 
-let currentFacingMode = "environment"; // Começa com a câmera traseira
-let currentStream = null; // Armazena o stream atual
-
-const video = document.getElementById("video");
+const videoContainer = document.getElementById("video").parentNode; // Contêiner do vídeo
 const toggleCameraButton = document.getElementById("toggleCameraButton");
 
-// Função para iniciar a câmera
+// Inicializa a câmera com o modo atual (traseiro ou frontal)
 async function startCamera(facingMode) {
-  // Interrompe o stream atual, se existir
+  // Para o stream atual, se existir
   if (currentStream) {
     currentStream.getTracks().forEach((track) => track.stop());
   }
 
   try {
-    // Solicita o novo stream
+    // Solicita acesso à câmera
     currentStream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: facingMode },
+      video: { facingMode },
     });
 
-    // Atribui o stream ao elemento de vídeo
-    video.srcObject = currentStream;
+    // Remove o vídeo atual
+    const oldVideo = document.getElementById("video");
+    if (oldVideo) oldVideo.remove();
 
-    // Garante que o vídeo é reproduzido corretamente
-    video.onloadedmetadata = () => video.play();
+    // Cria um novo elemento de vídeo
+    const newVideo = document.createElement("video");
+    newVideo.id = "video";
+    newVideo.autoplay = true;
+    newVideo.playsinline = true;
+    newVideo.srcObject = currentStream;
+
+    // Adiciona o novo vídeo ao contêiner
+    videoContainer.appendChild(newVideo);
+    newVideo.onloadedmetadata = () => newVideo.play();
   } catch (err) {
     alert("Erro ao acessar a câmera: " + err.message);
   }
 }
 
-// Alterna entre câmeras traseira e dianteira
+// Alterna entre câmeras (traseira e frontal)
 toggleCameraButton.addEventListener("click", () => {
   currentFacingMode = currentFacingMode === "environment" ? "user" : "environment";
   startCamera(currentFacingMode);
 });
 
-// Inicializa com a câmera traseira
+// Inicializa a câmera ao carregar a página
 startCamera(currentFacingMode);
 
 // Captura a imagem com a moldura
