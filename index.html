@@ -3,24 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Revival Photo</title>
+  <title>Revival Photo App</title>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container mt-5">
-    <h1 class="text-center mb-4">Revival Photo</h1>
-    <div class="row mt-4">
-      <div class="col-md-12 text-center">
-       <button id="toggleCameraButton" class="btn btn-secondary w-100 mt-4">Switch Camera</button>
-      </div>
-    </div>
+    <h1 class="text-center mb-4">Revival Photo App</h1>
     <div class="row">
       <div class="col-md-12 text-center">
         <!-- Camera and Frame -->
         <div class="position-relative" style="width: 100%; height: 400px; background-color: #000;">
-          <video id="video" autoplay playsinline class="w-100 h-100"></video>
+          
+<video id="video" autoplay playsinline class="w-100 h-100"></video>
           <canvas id="photoCanvas" class="position-absolute top-0 start-0 w-100 h-100"></canvas>
           <img id="frame" src="frames/frame1.png" alt="Frame" class="position-absolute top-0 start-0 w-100 h-100">
         </div>
@@ -29,10 +25,10 @@
     <div class="row mt-4">
       <!-- Capture and Save Buttons -->
       <div class="col-md-6 text-center">
-        <button id="captureButton" class="btn btn-primary w-100 mb-2">Tirar foto</button>
+        <button id="captureButton" class="btn btn-primary w-100">Tirar foto</button>
       </div>
       <div class="col-md-6 text-center">
-        <button id="saveButton" class="btn btn-success w-100 mb-2">Salvar</button>
+        <button id="saveButton" class="btn btn-success w-100">Baixar foto</button>
       </div>
     </div>
     <div class="row mt-4">
@@ -40,9 +36,9 @@
       <div class="col-md-12 text-center">
         <label for="frameSelector" class="form-label">Selecione uma moldura:</label>
         <select id="frameSelector" class="form-select">
-          <option value="frames/frame1.png">Moldura 1</option>
-          <option value="frames/frame2.png">Moldura 2</option>
-          <option value="frames/frame3.png">Moldura 3</option>
+          <option value="frames/frame1.png">Frame 1</option>
+          <option value="frames/frame2.png">Frame 2</option>
+          <option value="frames/frame3.png">Frame 3</option>
         </select>
       </div>
     </div>
