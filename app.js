@@ -9,20 +9,32 @@ const frameSelector = document.getElementById("frameSelector");
 // Contexto do canvas
 const ctx = photoCanvas.getContext("2d");
 
-// Inicializa a câmera
-navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
-  .then((stream) => {
-    const video = document.getElementById("video");
-    video.srcObject = stream;
+let currentFacingMode = "environment"; // Começa com a câmera traseira
 
-    // Garante que o vídeo seja reproduzido corretamente em iOS
-    video.onloadedmetadata = () => {
-      video.play();
-    };
-  })
-  .catch((err) => {
-    alert("Erro ao acessar a câmera: " + err.message);
-  });
+const video = document.getElementById("video");
+const toggleCameraButton = document.getElementById("toggleCameraButton");
+
+// Função para inicializar a câmera com a facingMode atual
+function startCamera(facingMode) {
+  navigator.mediaDevices
+    .getUserMedia({ video: { facingMode } })
+    .then((stream) => {
+      video.srcObject = stream;
+      video.onloadedmetadata = () => video.play();
+    })
+    .catch((err) => {
+      alert("Erro ao acessar a câmera: " + err.message);
+    });
+}
+
+// Alterna entre as câmeras
+toggleCameraButton.addEventListener("click", () => {
+  currentFacingMode = currentFacingMode === "environment" ? "user" : "environment";
+  startCamera(currentFacingMode);
+});
+
+// Inicializa com a câmera traseira
+startCamera(currentFacingMode);
 
 // Captura a imagem com a moldura
 captureButton.addEventListener("click", () => {
