@@ -10,24 +10,35 @@ const frameSelector = document.getElementById("frameSelector");
 const ctx = photoCanvas.getContext("2d");
 
 let currentFacingMode = "environment"; // Começa com a câmera traseira
+let currentStream = null; // Armazena o stream atual
 
 const video = document.getElementById("video");
 const toggleCameraButton = document.getElementById("toggleCameraButton");
 
-// Função para inicializar a câmera com a facingMode atual
-function startCamera(facingMode) {
-  navigator.mediaDevices
-    .getUserMedia({ video: { facingMode } })
-    .then((stream) => {
-      video.srcObject = stream;
-      video.onloadedmetadata = () => video.play();
-    })
-    .catch((err) => {
-      alert("Erro ao acessar a câmera: " + err.message);
+// Função para iniciar a câmera
+async function startCamera(facingMode) {
+  // Interrompe o stream atual, se existir
+  if (currentStream) {
+    currentStream.getTracks().forEach((track) => track.stop());
+  }
+
+  try {
+    // Solicita o novo stream
+    currentStream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: facingMode },
     });
+
+    // Atribui o stream ao elemento de vídeo
+    video.srcObject = currentStream;
+
+    // Garante que o vídeo é reproduzido corretamente
+    video.onloadedmetadata = () => video.play();
+  } catch (err) {
+    alert("Erro ao acessar a câmera: " + err.message);
+  }
 }
 
-// Alterna entre as câmeras
+// Alterna entre câmeras traseira e dianteira
 toggleCameraButton.addEventListener("click", () => {
   currentFacingMode = currentFacingMode === "environment" ? "user" : "environment";
   startCamera(currentFacingMode);
