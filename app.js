@@ -1,18 +1,18 @@
+let currentFacingMode = "environment"; // Câmera inicial (traseira)
+let currentStream = null; // Stream de vídeo atual
+
 // Elementos do DOM
+const videoContainer = document.getElementById("video").parentNode;
+const toggleCameraButton = document.getElementById("toggleCameraButton");
 const video = document.getElementById("video");
-const photoCanvas = document.getElementById("photoCanvas");
-const frame = document.getElementById("frame");
 const captureButton = document.getElementById("captureButton");
 const saveButton = document.getElementById("saveButton");
+const photoCanvas = document.getElementById("photoCanvas");
+const frame = document.getElementById("frame");
 const frameSelector = document.getElementById("frameSelector");
 
 // Contexto do canvas
 const ctx = photoCanvas.getContext("2d");
-let currentFacingMode = "environment"; // Câmera inicial (traseira)
-let currentStream = null; // Stream de vídeo atual
-
-const videoContainer = document.getElementById("video").parentNode; // Contêiner do vídeo
-const toggleCameraButton = document.getElementById("toggleCameraButton");
 
 // Inicializa a câmera com o modo atual (traseiro ou frontal)
 async function startCamera(facingMode) {
@@ -52,9 +52,6 @@ toggleCameraButton.addEventListener("click", () => {
   startCamera(currentFacingMode);
 });
 
-// Inicializa a câmera ao carregar a página
-startCamera(currentFacingMode);
-
 // Captura a imagem com a moldura
 captureButton.addEventListener("click", () => {
   // Ajusta o tamanho do canvas ao vídeo
@@ -87,3 +84,6 @@ saveButton.addEventListener("click", () => {
   link.href = photoCanvas.toDataURL("image/png"); // Converte o canvas para imagem PNG
   link.click(); // Aciona o download
 });
+
+// Inicializa a câmera ao carregar a página
+startCamera(currentFacingMode);
